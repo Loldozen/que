@@ -6,7 +6,7 @@ from rest_framework import status
 class AccountsTest(APITestCase):
     def setUp(self):
         # We want to go ahead and originally create a user. 
-        self.test_doctor = Doctor.objects.create_user(email='test@example.com',password='testpassword', mdcn=1234, language='english')
+        self.test_doctor = Doctor.objects.create(username='ololade',phone='2345643',email='test@example.com',password='testpassword', mdcn=1234,specialization='cardio',gender='Female', language='english')
 
         # URL for creating an account.
         self.create_url = reverse('doctor:signup')
@@ -19,7 +19,13 @@ class AccountsTest(APITestCase):
             'mdcn': 4567,
             'email': 'foobar@example.com',
             'password': 'somepassword',
-            'language':'english'
+            'language':'english',
+            'specialization': 'cardiologist',
+            'phone':'902345677',
+            'username': 'loldozen',
+            'name':'ahmad',
+            'gender': 'Male'
+
         }
 
         response = self.client.post(self.create_url , data, format='json')

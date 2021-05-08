@@ -33,8 +33,8 @@ class Doctor(User):
     language = models.JSONField(null=True, blank=True)
     agreement = models.BooleanField(_('terms and conditions'), default=False)
     verified = models.BooleanField( default=False)
-    objects = CustomUserManager()
-    #objects = models.Manager()
+    #objects = CustomUserManager()
+    objects = models.Manager()
 
     #USERNAME_FIELD = 'mdcn'
 

@@ -49,9 +49,18 @@ class DoctorSerializer(serializers.ModelSerializer):
         #print(validated_data)
         #print("ahamd")
         #doctor = Doctor.objects.create_user(validated_data['email'], validated_data['password'], )
-        doctor = Doctor.objects.create_user(validated_data['email'],validated_data['password'],validated_data)
+        #doctor = Doctor.objects.create_user(validated_data['email'],validated_data['password'],validated_data)
+        password = validated_data.pop('password')
+        doctor = Doctor(**validated_data)
+        doctor.set_password(password)
+        doctor.save()
         return doctor
     class Meta: 
         model = Doctor
         fields = ('mdcn', 'email', 'specialization','password', 'language', 'name','gender', 'phone')
-    
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.CharField(required=True )
+    password = serializers.CharField(required=True)
+
+    #def validate(self, data):
